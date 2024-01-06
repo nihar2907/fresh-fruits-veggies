@@ -14,7 +14,7 @@ const MongoDbStore = require('connect-mongo');
 
 
 // DB connection
-mongoose.connect("mongodb+srv://nihar:nihar@cluster0.oggvk04.mongodb.net/pizza?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGO_URI);
 const dbConnection = mongoose.connection;
 
 dbConnection.once('open', () => {
@@ -27,7 +27,7 @@ dbConnection.on('error', (error) => {
 
 // Session store
 let mongoStore =  MongoDbStore.create({
-    mongoUrl : "mongodb+srv://nihar:nihar@cluster0.oggvk04.mongodb.net/pizza?retryWrites=true&w=majority",
+    mongoUrl : process.env.MONGO_URI,
     mongooseConnection: dbConnection,
     collection: 'sessions'
 })
